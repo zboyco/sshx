@@ -64,6 +64,11 @@ add_ssh_config() {
     # echo "密码（可选）："
     echo "Password (optional):"
     read -r password
+    if [ -z "$password" ]; then
+        # echo "私钥文件路径（可选）："
+        echo "Path to private key file (optional):"
+        read -r private_key
+    fi
 
     # 生成保存配置的文件路径
     config_file="$config_dir/$config_prefix$config_name"
@@ -73,9 +78,13 @@ add_ssh_config() {
     if [ -n "$password" ]; then
         echo "printf '$password' | pbcopy" >> "$config_file"
         echo "echo '--- password copied to clipboard ---'" >> "$config_file"
-        echo "expect -c 'spawn ssh -p $port $username@$host -o ServerAliveInterval=60; expect \"password:\"; send \"$password\\r\"; interact'" >> "$config_file"
+        echo "expect -c 'spawn ssh $username@$host -p $port -o ServerAliveInterval=60; expect \"password:\"; send \"$password\\r\"; interact'" >> "$config_file"
     else
-        echo "ssh $username@$host -p $port -o ServerAliveInterval=60" >> "$config_file"
+        if [ -n "$private_key" ]; then
+            echo "ssh -i \"$private_key\" $username@$host -p $port -o ServerAliveInterval=60" >> "$config_file"
+        else
+            echo "ssh $username@$host -p $port -o ServerAliveInterval=60" >> "$config_file"
+        fi
     fi
 
     # 给文件添加可执行权限
