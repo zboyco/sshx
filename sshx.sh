@@ -15,7 +15,8 @@ check_duplicate_name() {
         if [ -x "$config_file" ]; then
             existing_name=$(basename "$config_file")
             if [ "$config_prefix$new_name" == "$existing_name" ]; then
-                echo "配置名称 '$new_name' 已存在，请选择其他名称:"
+                # echo "配置名称 '$new_name' 已存在，请选择其他名称:"
+                echo "Remote name '$new_name' already exists, please choose another name:"
                 return 1
             fi
         fi
@@ -25,34 +26,43 @@ check_duplicate_name() {
 
 # 函数：添加新的 SSH 配置
 add_ssh_config() {
-    echo "请输入新配置的名称："
+    # echo "新配置的名称："
+    echo "Name for the new remote:"
     read -r config_name
     while [ -z "$config_name" ]; do
-        echo "配置名称不能为空，请重新输入："
+        # echo "配置名称不能为空，请重新输入："
+        echo "Remote name cannot be empty, please try again:"
         read -r config_name
     done
     while ! check_duplicate_name "$config_name"; do
         read -r config_name
     done
     
-    echo "请输入新配置的描述信息（可选）："
+    # echo "新配置的描述信息（可选）："
+    echo "Description for the new remote (optional):"
     read -r config_desc
-    echo "请输入主机名或 IP 地址："
+    # echo "主机名或 IP 地址："
+    echo "Hostname or IP address:"
     read -r host
     while [ -z "$host" ]; do
-        echo "主机名或 IP 地址不能为空，请重新输入："
+        # echo "主机名或 IP 地址不能为空，请重新输入："
+        echo "Hostname or IP address cannot be empty, please try again:"
         read -r host
     done
-    echo "请输入端口号（默认为22）："
+    # echo "端口号（默认为22）："
+    echo "Port number (default is 22):"
     read -r port
     port=${port:-22} # 如果没有输入端口号，则默认为22
-    echo "请输入用户名："
+    # echo "用户名："
+    echo "Username:"
     read -r username
     while [ -z "$username" ]; do
-        echo "用户名不能为空，请重新输入："
+        # echo "用户名不能为空，请重新输入："
+        echo "Username cannot be empty, please try again:"
         read -r username
     done
-    echo "请输入密码："
+    # echo "密码（可选）："
+    echo "Password (optional):"
     read -r password
 
     # 生成保存配置的文件路径
@@ -62,28 +72,31 @@ add_ssh_config() {
     echo "# desc $config_desc" > "$config_file"
     if [ -n "$password" ]; then
         echo "printf '$password' | pbcopy" >> "$config_file"
-        echo "echo '密码已拷贝'" >> "$config_file"
-        echo "expect -c 'spawn ssh -p $port $username@$host; expect \"password:\"; send \"$password\\r\"; interact'" >> "$config_file"
+        echo "echo '--- password copied to clipboard ---'" >> "$config_file"
+        echo "expect -c 'spawn ssh -p $port $username@$host -o ServerAliveInterval=60; expect \"password:\"; send \"$password\\r\"; interact'" >> "$config_file"
     else
-        echo "ssh $username@$host -p $port" >> "$config_file"
+        echo "ssh $username@$host -p $port -o ServerAliveInterval=60" >> "$config_file"
     fi
 
     # 给文件添加可执行权限
     chmod +x "$config_file"
 
-    echo "已保存新的 SSH 配置：$config_name"
+    # echo "已保存新的 SSH 配置：$config_name"
+    echo "New ssh remote config saved: $config_file"
 }
 
 # 函数：列出所有 SSH 配置
 list_ssh_configs() {
     if [ -z "$(ls -A "$config_dir")" ]; then
-        echo "没有找到任何 SSH 配置。"
+        # echo "没有找到任何 SSH 配置。"
+        echo "No ssh remote config found."
         exit 1
     fi
 
     local count=1
     # 打印所有配置名称和描述，并添加序号
-    printf "\n  %-*s |  %-*s |  %s\n" 4 序号 22 名称 备注
+    echo "------------------------------------------------------------------"
+    printf "  %-*s |  %-*s |  %s\n" 4 No. 20 Name Description
     echo "-------+-----------------------+----------------------------------"
     for config_file in "$config_dir/$config_prefix"*; do
         if [ -x "$config_file" ]; then
@@ -92,14 +105,20 @@ list_ssh_configs() {
             ((count++))
         fi
     done
+    echo "------------------------------------------------------------------"
     echo ""
 }
 
 # 函数：选择并执行 SSH 配置
 select_and_execute() {
     list_ssh_configs
-    echo "请选择链接（输入序号或名称, 按 Ctrl+C 退出）："
+    # echo "请选择（输入序号或名称, 按 Ctrl+C 退出）："
+    echo "Select a remote (input number or name, press Ctrl+C to exit):"
     read -r choice
+    # 如果用户输入 q 或 quit 或 exit，则退出程序
+    if [ "$choice" == "q" ] || [ "$choice" == "quit" ] || [ "$choice" == "exit" ]; then
+        exit 0
+    fi
     # 判断用户输入是否是数字
     if [[ "$choice" =~ ^[0-9]+$ ]]; then
         # 如果是数字，根据序号执行对应配置
@@ -112,7 +131,8 @@ select_and_execute() {
         echo ""
         bash "$config_file"
     else
-        echo "配置 '$choice' 不存在或不可执行。"
+        # echo "配置 '$choice' 不存在或不可执行。"
+        echo "Remote config '$choice' not found or not executable."
         exit 1
     fi
 }
@@ -128,4 +148,3 @@ main() {
 
 # 执行主函数
 main "$@"
-
