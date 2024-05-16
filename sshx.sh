@@ -137,10 +137,22 @@ select_and_execute() {
     fi
 }
 
+# 帮助信息
+usage() {
+    echo "Usage: sshx [command]"
+    echo "With no command, sshx will display a list of all saved connections."
+    echo ""
+    echo "Available commands:"
+    echo "  new           Add a new SSH configuration"
+    echo "  --help, -h    Display this help message"
+}
+
 # 主函数
 main() {
     if [ "$1" == "new" ]; then
         add_ssh_config
+    elif [ "$1" == "help" ] || [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+        usage
     else
         select_and_execute
     fi

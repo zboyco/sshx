@@ -24,5 +24,6 @@ Usage: sshx [command]
 With no command, sshx will display a list of all saved connections.
 
 Available commands:
-  new       Create a new SSH connection
+  new           Create a new SSH connection
+  --help, -h    Display this help message
 ```
