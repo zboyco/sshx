@@ -1,6 +1,8 @@
 # sshx
 
-SSHX is a command line tool for managing SSH connections. It provides a simple and intuitive interface for managing multiple SSH connections and executing commands on them.
+sshx is a command line tool for managing SSH connections. It provides a simple and intuitive interface for managing multiple SSH connections and executing commands on them.
+
+<img alt="Welcome to sshx" src="https://raw.githubusercontent.com/zboyco/sshx/master/demo.gif" width="600" />
 
 ## Install
 
