@@ -6,6 +6,9 @@ sshx is a command line tool for managing SSH connections. It provides a simple a
 
 ## Install
 
+> **Note: Requires sudo privileges to install sshx into /usr/local/bin.**  
+Or you can download the sshx.sh file and manually add it to the environment variable.
+
 ### Install sshx via curl
 
 ```
