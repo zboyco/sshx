@@ -159,6 +159,12 @@ Are you sure you want to delete remote 'dev-server'? (y/N):
 Remote config 'dev-server' has been deleted.
 ```
 
+或使用简写命令：
+
+```bash
+$ sshx rm
+```
+
 ### 升级 sshx
 
 ```bash
@@ -181,12 +187,6 @@ Current version backed up to: /usr/local/bin/sshx.backup
 
 You can restore the previous version using:
   cp /usr/local/bin/sshx.backup /usr/local/bin/sshx
-```
-
-或使用简写命令：
-
-```bash
-$ sshx rm
 ```
 
 ## 安全说明
