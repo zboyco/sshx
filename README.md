@@ -4,7 +4,7 @@ English | [简体中文](README_CN.md)
 
 sshx is a command line tool for managing SSH connections. It provides a simple and intuitive interface for managing multiple SSH connections and executing commands on them.
 
-<img alt="Welcome to sshx" src="https://raw.githubusercontent.com/zboyco/sshx/master/demo.gif" width="600" />
+<img alt="Welcome to sshx" src="https://raw.githubusercontent.com/zboyco/sshx/main/demo.gif" width="600" />
 
 ## Install
 
@@ -14,12 +14,12 @@ sshx is a command line tool for managing SSH connections. It provides a simple a
 
 **Install via curl:**
 ```bash
-curl -s https://raw.githubusercontent.com/zboyco/sshx/master/install.sh | sh
+curl -s https://raw.githubusercontent.com/zboyco/sshx/main/install.sh | sh
 ```
 
 **Install via wget:**
 ```bash
-wget https://raw.githubusercontent.com/zboyco/sshx/master/install.sh -O - | sh
+wget https://raw.githubusercontent.com/zboyco/sshx/main/install.sh -O - | sh
 ```
 
 ### Manual Installation
@@ -28,7 +28,7 @@ If you prefer not to use the automatic installation script:
 
 1. Download the script:
    ```bash
-   curl -O https://raw.githubusercontent.com/zboyco/sshx/master/sshx.sh
+   curl -O https://raw.githubusercontent.com/zboyco/sshx/main/sshx.sh
    ```
 
 2. Make it executable:

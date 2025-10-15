@@ -314,14 +314,14 @@ compare_versions() {
 
 # 函数：检查最新版本
 check_latest_version() {
-    echo "Checking for updates..."
+    echo "Checking for updates..." >&2
 
     # 使用 HTTPS 并添加安全标志
     local latest_version
-    latest_version=$(curl -sfL --max-redirs 3 --max-time 10 https://raw.githubusercontent.com/zboyco/sshx/master/sshx.sh | grep '^VERSION=' | head -1 | cut -d'"' -f2)
+    latest_version=$(curl -sfL --max-redirs 3 --max-time 10 https://raw.githubusercontent.com/zboyco/sshx/main/sshx.sh | grep '^VERSION=' | head -1 | cut -d'"' -f2)
 
     if [ -z "$latest_version" ]; then
-        echo "Error: Failed to check for updates. Please check your internet connection."
+        echo "Error: Failed to check for updates. Please check your internet connection." >&2
         return 1
     fi
 
@@ -393,7 +393,7 @@ upgrade_sshx() {
     trap "rm -f '$temp_file'" EXIT INT TERM
 
     # 下载新版本到临时文件（添加安全标志）
-    if ! curl -sfL --max-redirs 3 --max-time 30 https://raw.githubusercontent.com/zboyco/sshx/master/sshx.sh -o "$temp_file"; then
+    if ! curl -sfL --max-redirs 3 --max-time 30 https://raw.githubusercontent.com/zboyco/sshx/main/sshx.sh -o "$temp_file"; then
         handle_error "Failed to download the latest version."
     fi
 
@@ -431,9 +431,9 @@ upgrade_sshx() {
         fi
     fi
 
-    # 设置执行权限
-    if ! chmod +x "$sshx_path" 2>/dev/null; then
-        sudo chmod +x "$sshx_path"
+    # 设置文件权限为 755 (rwxr-xr-x)
+    if ! chmod 755 "$sshx_path" 2>/dev/null; then
+        sudo chmod 755 "$sshx_path"
     fi
 
     echo ""

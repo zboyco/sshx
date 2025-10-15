@@ -4,7 +4,7 @@
 
 sshx 是一个用于管理 SSH 连接的命令行工具。它提供了一个简单直观的界面，用于管理多个 SSH 连接并在其上执行命令。
 
-<img alt="Welcome to sshx" src="https://raw.githubusercontent.com/zboyco/sshx/master/demo.gif" width="600" />
+<img alt="Welcome to sshx" src="https://raw.githubusercontent.com/zboyco/sshx/main/demo.gif" width="600" />
 
 ## 安装
 
@@ -14,12 +14,12 @@ sshx 是一个用于管理 SSH 连接的命令行工具。它提供了一个简�
 
 **通过 curl 安装：**
 ```bash
-curl -s https://raw.githubusercontent.com/zboyco/sshx/master/install.sh | sh
+curl -s https://raw.githubusercontent.com/zboyco/sshx/main/install.sh | sh
 ```
 
 **通过 wget 安装：**
 ```bash
-wget https://raw.githubusercontent.com/zboyco/sshx/master/install.sh -O - | sh
+wget https://raw.githubusercontent.com/zboyco/sshx/main/install.sh -O - | sh
 ```
 
 ### 手动安装
@@ -28,7 +28,7 @@ wget https://raw.githubusercontent.com/zboyco/sshx/master/install.sh -O - | sh
 
 1. 下载脚本：
    ```bash
-   curl -O https://raw.githubusercontent.com/zboyco/sshx/master/sshx.sh
+   curl -O https://raw.githubusercontent.com/zboyco/sshx/main/sshx.sh
    ```
 
 2. 添加执行权限：
