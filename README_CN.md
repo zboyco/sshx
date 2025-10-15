@@ -55,7 +55,7 @@ wget https://raw.githubusercontent.com/zboyco/sshx/master/install.sh -O - | sh
 ## 使用方法
 
 ```
-sshx v0.1.0
+sshx v0.1.1
 
 用法: sshx [命令]
 
@@ -67,6 +67,9 @@ sshx v0.1.0
   upgrade          升级 sshx 到最新版本
   --help, -h       显示帮助信息
   --version, -v    显示版本信息
+
+环境变量:
+  SSH_EXPECT_TIMEOUT    设置 expect 超时时间（默认：30 秒）
 ```
 
 ## 功能特性
@@ -172,12 +175,12 @@ $ sshx upgrade
 sshx upgrade utility
 
 Checking for updates...
-Current version: v0.1.0
+Current version: v0.1.1
 Latest version:  v0.2.0
 
 A new version is available!
 
-Do you want to upgrade to v0.2.0? (y/N): y
+Do you want to upgrade to v0.2.0? (Y/n): y
 
 Downloading latest version...
 Installation location: /usr/local/bin/sshx

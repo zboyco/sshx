@@ -55,7 +55,7 @@ If you prefer not to use the automatic installation script:
 ## Usage
 
 ```
-sshx v0.1.0
+sshx v0.1.1
 
 Usage: sshx [command]
 
@@ -67,6 +67,9 @@ Available commands:
   upgrade          Upgrade sshx to the latest version
   --help, -h       Display this help message
   --version, -v    Display version information
+
+Environment variables:
+  SSH_EXPECT_TIMEOUT    Set expect timeout (default: 30 seconds)
 ```
 
 ## Features
@@ -166,12 +169,12 @@ $ sshx upgrade
 sshx upgrade utility
 
 Checking for updates...
-Current version: v0.1.0
+Current version: v0.1.1
 Latest version:  v0.2.0
 
 A new version is available!
 
-Do you want to upgrade to v0.2.0? (y/N): y
+Do you want to upgrade to v0.2.0? (Y/n): y
 
 Downloading latest version...
 Installation location: /usr/local/bin/sshx
