@@ -4,6 +4,8 @@ English | [简体中文](README_CN.md)
 
 sshx is a command line tool for managing SSH connections. It provides a simple and intuitive interface for managing multiple SSH connections and executing commands on them.
 
+> **⚠️ System Requirements**: This tool only supports **macOS** and **Linux** systems. Windows users should use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) or [Cygwin](https://www.cygwin.com/) environments.
+
 <img alt="Welcome to sshx" src="https://raw.githubusercontent.com/zboyco/sshx/main/demo.gif" width="600" />
 
 ## Install

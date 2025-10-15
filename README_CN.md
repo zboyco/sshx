@@ -4,6 +4,8 @@
 
 sshx 是一个用于管理 SSH 连接的命令行工具。它提供了一个简单直观的界面，用于管理多个 SSH 连接并在其上执行命令。
 
+> **⚠️ 系统支持**: 本工具仅支持 **macOS** 和 **Linux** 系统。Windows 用户请使用 [WSL2](https://docs.microsoft.com/zh-cn/windows/wsl/install) 或 [Cygwin](https://www.cygwin.com/) 环境运行。
+
 <img alt="Welcome to sshx" src="https://raw.githubusercontent.com/zboyco/sshx/main/demo.gif" width="600" />
 
 ## 安装

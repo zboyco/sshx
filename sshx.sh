@@ -553,18 +553,14 @@ add_ssh_config() {
         fi
     fi
 
-    # 询问是否使用 trzsz
+    # 检查 trzsz 是否安装,仅在已安装时询问
     echo ""
-    if confirm_action "Do you want to use trzsz for file transfer support?"; then
-        # 检查 trzsz 命令是否存在
-        if ! command_exists trzsz; then
-            echo "Warning: 'trzsz' command is not installed. File transfer support will not work."
-            echo "Please install trzsz: https://github.com/trzsz/trzsz"
-            if ! confirm_action "Continue anyway?"; then
-                return 1
-            fi
+    if command_exists trzsz; then
+        if confirm_action "Do you want to use trzsz for file transfer support?"; then
+            use_trzsz="yes"
+        else
+            use_trzsz="no"
         fi
-        use_trzsz="yes"
     else
         use_trzsz="no"
     fi
